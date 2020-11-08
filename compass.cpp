@@ -1,10 +1,10 @@
 #include "compass.h"
 
+#include "src/blinks-support/opposite_face.h"
+
 namespace compass {
 
 static byte face_offset_;
-
-static const byte opposite_face_[] = {3, 4, 5, 0, 1, 2};
 
 // The face2 parameter is an int8_t because we need to pass a "negative face"
 // when computing an absolute local face.
@@ -17,7 +17,7 @@ void ComputeFaceOffset(byte remote_face, byte local_face) {
   // The offset is the difference beetween the opposite face to the local_face
   // and the remote_face. This formula always results in a positive offset.
   face_offset_ =
-      positive_face_distance(opposite_face_[local_face], remote_face);
+      positive_face_distance(support::OppositeFace(local_face), remote_face);
 }
 
 void ResetFaceOffset() { face_offset_ = 0; }
