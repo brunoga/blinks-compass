@@ -1,6 +1,6 @@
 #include "compass.h"
 
-#include "src/blinks-support/opposite_face.h"
+#include "opposite_face.h"
 
 namespace compass {
 
