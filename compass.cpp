@@ -8,8 +8,7 @@ static byte face_offset_;
 
 // The face2 parameter is an int8_t because we need to pass a "negative face"
 // when computing an absolute local face.
-static byte __attribute__((noinline))
-positive_face_distance(byte face1, int8_t face2) {
+static byte positive_face_distance(byte face1, int8_t face2) {
   return (face1 - face2 + FACE_COUNT) % FACE_COUNT;
 }
 
