@@ -1,5 +1,5 @@
-#ifndef COMPASS_H_
-#define COMPASS_H_
+#ifndef ORIENTATION_H_
+#define ORIENTATION_H_
 
 #include <blinklib.h>
 
