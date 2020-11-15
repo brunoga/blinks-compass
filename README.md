@@ -1,2 +1,2 @@
 # blinks-compass
-Library to allow setting a global compass for connected Blinks.
+Library to allow setting a global orientation for connected Blinks.
