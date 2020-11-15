@@ -1,8 +1,8 @@
-#include "compass.h"
+#include "orientation.h"
 
 #include "opposite_face.h"
 
-namespace compass {
+namespace orientation {
 
 static byte face_offset_;
 
@@ -31,4 +31,4 @@ byte LocalFace(byte global_face) {
   return positive_face_distance(global_face, -face_offset_);
 }
 
-}  // namespace compass
+}  // namespace orientation

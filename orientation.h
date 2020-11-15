@@ -3,7 +3,7 @@
 
 #include <blinklib.h>
 
-namespace compass {
+namespace orientation {
 
 // This computes the face offset used for associating an absolute local face to
 // a relative global face. The remote_face parameter is the (relative) face the
@@ -25,6 +25,6 @@ byte GlobalFace(byte face);
 // face.
 byte LocalFace(byte global_face);
 
-}  // namespace compass
+}  // namespace orientation
 
 #endif

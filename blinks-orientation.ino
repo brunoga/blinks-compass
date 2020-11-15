@@ -6,7 +6,7 @@ void setup() {}
 
 static void advertise() {
   FOREACH_FACE(face) { setValueSentOnFace(face + 1, face); }
-  compass::ResetFaceOffset();
+  orientation::ResetFaceOffset();
 }
 
 static void process() {
@@ -21,10 +21,10 @@ static void process() {
 
     remote_face--;
 
-    compass::ComputeFaceOffset(remote_face, local_face);
+    orientation::ComputeFaceOffset(remote_face, local_face);
 
     FOREACH_FACE(face) {
-      setValueSentOnFace(compass::GlobalFace(face) + 1, face);
+      setValueSentOnFace(orientation::GlobalFace(face) + 1, face);
     }
 
     break;
@@ -40,5 +40,5 @@ void loop() {
 
   setColor(OFF);
 
-  setColorOnFace(GREEN, compass::LocalFace(0));
+  setColorOnFace(GREEN, orientation::LocalFace(0));
 }
