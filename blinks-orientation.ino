@@ -1,6 +1,6 @@
 #include <blinklib.h>
 
-#include "compass.h"
+#include "orientation.h"
 
 void setup() {}
 
