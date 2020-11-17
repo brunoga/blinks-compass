@@ -5,27 +5,27 @@
 void setup() {}
 
 static void advertise() {
-  FOREACH_FACE(face) { setValueSentOnFace(face + 1, face); }
-  orientation::ResetFaceOffset();
+  FOREACH_FACE(absolute_local_face) {
+    setValueSentOnFace(orientation::RelativeLocalFace(absolute_local_face) + 1,
+                       absolute_local_face);
+  }
 }
 
 static void process() {
-  FOREACH_FACE(local_face) {
-    if (isValueReceivedOnFaceExpired(local_face)) continue;
+  FOREACH_FACE(absolute_local_face) {
+    if (isValueReceivedOnFaceExpired(absolute_local_face)) continue;
 
-    if (!didValueOnFaceChange(local_face)) continue;
+    if (!didValueOnFaceChange(absolute_local_face)) continue;
 
-    byte remote_face = getLastValueReceivedOnFace(local_face);
+    byte relative_remote_face = getLastValueReceivedOnFace(absolute_local_face);
 
-    if (remote_face == 0) continue;
+    if (relative_remote_face == 0) continue;
 
-    remote_face--;
+    relative_remote_face--;
 
-    orientation::ComputeFaceOffset(remote_face, local_face);
+    orientation::Setup(relative_remote_face, absolute_local_face);
 
-    FOREACH_FACE(face) {
-      setValueSentOnFace(orientation::GlobalFace(face) + 1, face);
-    }
+    advertise();
 
     break;
   }
@@ -35,10 +35,12 @@ void loop() {
   process();
 
   if (buttonDoubleClicked()) {
+    orientation::Reset();
+
     advertise();
   }
 
   setColor(OFF);
 
-  setColorOnFace(GREEN, orientation::LocalFace(0));
+  setColorOnFace(GREEN, orientation::RelativeLocalFace(0));
 }
