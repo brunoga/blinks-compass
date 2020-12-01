@@ -22,7 +22,7 @@ void Setup(byte relative_remote_face, byte absolute_local_face) {
 
 void Reset() { face_offset_ = 0; }
 
-byte __attribute__((noinline)) RelativeLocalFace(byte absolute_local_face) {
+byte RelativeLocalFace(byte absolute_local_face) {
   return positive_face_distance(absolute_local_face, face_offset_);
 }
 
