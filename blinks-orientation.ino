@@ -4,32 +4,43 @@
 
 void setup() {}
 
-static byte previous_face_value_[FACE_COUNT];
+static void advertise() {
+  FOREACH_FACE(absolute_local_face) {
+    setValueSentOnFace(orientation::RelativeLocalFace(absolute_local_face) + 1,
+                       absolute_local_face);
+  }
+}
 
-static byte face_offset_;
+static void process() {
+  FOREACH_FACE(absolute_local_face) {
+    if (isValueReceivedOnFaceExpired(absolute_local_face)) continue;
+
+    if (!didValueOnFaceChange(absolute_local_face)) continue;
+
+    byte relative_remote_face = getLastValueReceivedOnFace(absolute_local_face);
+
+    if (relative_remote_face == 0) continue;
+
+    relative_remote_face--;
+
+    orientation::Setup(relative_remote_face, absolute_local_face);
+
+    advertise();
+
+    break;
+  }
+}
 
 void loop() {
-  FOREACH_FACE(face) {
-    if (isValueReceivedOnFaceExpired(face)) continue;
-
-    byte face_value = getLastValueReceivedOnFace(face);
-
-    if (face_value != previous_face_value_[face]) {
-      face_offset_ = orientation::FaceOffset(face, face_value);
-
-      previous_face_value_[face] = face_value;
-    }
-  }
+  process();
 
   if (buttonDoubleClicked()) {
-    face_offset_ = 0;
+    orientation::Reset();
+
+    advertise();
   }
 
   setColor(OFF);
-  setColorOnFace(GREEN, orientation::AbsoluteLocalFace(0, face_offset_));
 
-  FOREACH_FACE(face) {
-    setValueSentOnFace(orientation::RelativeLocalFace(face, face_offset_),
-                       face);
-  }
+  setColorOnFace(GREEN, orientation::RelativeLocalFace(0));
 }
