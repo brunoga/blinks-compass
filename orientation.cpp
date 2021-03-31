@@ -1,8 +1,8 @@
 #include "orientation.h"
 
-#include "opposite_face.h"
-
 namespace orientation {
+
+static const byte opposite_face_[] = {3, 4, 5, 0, 1, 2};
 
 // The face2 parameter is an int8_t because we need to pass a "negative face"
 // when computing an absolute local face.
@@ -11,11 +11,13 @@ positive_face_distance(byte face1, int8_t face2) {
   return (byte)(((int8_t)face1 - face2 + FACE_COUNT) % FACE_COUNT);
 }
 
+byte OppositeFace(byte face) { return opposite_face_[face]; }
+
 byte FaceOffset(byte absolute_local_face, byte relative_remote_face) {
   // The offset is the difference beetween the face opposite to the
   // absolute_local_face and the relative_remote_face. This formula always
   // results in a positive offset.
-  return positive_face_distance(support::OppositeFace(absolute_local_face),
+  return positive_face_distance(OppositeFace(absolute_local_face),
                                 relative_remote_face);
 }
 
