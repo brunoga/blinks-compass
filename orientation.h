@@ -14,10 +14,6 @@ namespace orientation {
 // relative faces match.
 byte FaceOffset(byte absolute_local_face, byte relative_remote_face);
 
-// Returns the opposite face in relation to the given face. Uses a very compact
-// and fast method to do that.
-byte OppositeFace(byte face);
-
 // Returns the relative local face associated with the given absolute local
 // face based on the given face_offset.
 byte RelativeLocalFace(byte absolute_local_face, byte face_offset);
