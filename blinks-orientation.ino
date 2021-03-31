@@ -25,8 +25,6 @@ static void process() {
 
     orientation::Setup(relative_remote_face, absolute_local_face);
 
-    advertise();
-
     break;
   }
 }
@@ -36,11 +34,11 @@ void loop() {
 
   if (buttonDoubleClicked()) {
     orientation::Reset();
-
-    advertise();
   }
 
   setColor(OFF);
 
-  setColorOnFace(GREEN, orientation::RelativeLocalFace(0));
+  setColorOnFace(GREEN, orientation::AbsoluteLocalFace(0));
+
+  advertise();
 }
