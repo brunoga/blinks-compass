@@ -31,5 +31,6 @@
 *.out
 *.app
 
-# VSCode configuration
-.vscode
+# VSCode
+.vscode/*
+!.vscode/arduino.json
