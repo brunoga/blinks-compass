@@ -20,12 +20,22 @@ void Setup(byte relative_remote_face, byte absolute_local_face);
 
 // Same as above but tries to determine what is the best orientation
 // independently of any information from remote faces being available. It
-// determines that based on the currebtly connected faces.
+// determines that based on the currently connected faces.
 void Setup();
 
 // Resets the local Blink orientation. The relative local face will be equal to
 // the absolute local face.
 void Reset();
+
+// Returns what would be the face offset associated with the given parameters.
+// This does not change the current orientation.
+byte FaceOffset(byte relative_remote_face, byte absolute_local_face);
+
+// Same as above but tries to determine what is the best orientation
+// independently of any information from remote faces being available. It
+// determines that based on the currently connected faces. This does not change
+// the current orientation.
+byte FaceOffset();
 
 // Returns the relative local face associated with the given absolute local
 // face.
@@ -34,10 +44,6 @@ byte RelativeLocalFace(byte absolute_local_face);
 // Returns the absolute local face associated with the given relative local
 // face.
 byte AbsoluteLocalFace(byte relative_local_face);
-
-// Returns the opposite face in relation to the given face. Uses a very compact
-// and fast method to do that.
-byte OppositeFace(byte face);
 
 }  // namespace orientation
 

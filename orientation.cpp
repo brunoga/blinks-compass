@@ -36,11 +36,17 @@ static byte best_face_offset() {
 void Setup(byte relative_remote_face, byte absolute_local_face) {
   // The offset is the difference beetween the opposite face to the local_face
   // and the remote_face. This formula always results in a positive offset.
-  face_offset_ = positive_face_distance(OppositeFace(absolute_local_face),
-                                        relative_remote_face);
+  face_offset_ = FaceOffset(relative_remote_face, absolute_local_face);
 }
 
-void Setup() { face_offset_ = best_face_offset(); }
+void Setup() { face_offset_ = FaceOffset(); }
+
+byte FaceOffset(byte relative_remote_face, byte absolute_local_face) {
+  return positive_face_distance(opposite_face_[absolute_local_face],
+                                relative_remote_face);
+}
+
+byte FaceOffset() { return best_face_offset(); }
 
 void Reset() { face_offset_ = 0; }
 
@@ -51,7 +57,5 @@ byte RelativeLocalFace(byte absolute_local_face) {
 byte AbsoluteLocalFace(byte relative_local_face) {
   return positive_face_distance(relative_local_face, -face_offset_);
 }
-
-byte OppositeFace(byte face) { return opposite_face_[face]; }
 
 }  // namespace orientation
