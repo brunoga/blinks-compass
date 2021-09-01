@@ -13,11 +13,11 @@
 
 namespace orientation {
 
-// Sets up the local Blink orientation based on the given face offset.
-void Setup(byte face_offset);
+// Sets the local Blink orientation based on the given face offset.
+void SetFaceOffset(byte face_offset);
 
 // Returns the current face offset.
-byte FaceOffset();
+byte GetFaceOffset();
 
 // Returns what would be the face offset associated with the given parameters.
 // The relative_remote_face parameter is the face the message was sent to in a

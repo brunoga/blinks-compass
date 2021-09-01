@@ -33,9 +33,9 @@ static byte best_face_offset() {
   return 0;
 }
 
-void Setup(byte face_offset) { face_offset_ = face_offset; }
+void SetFaceOffset(byte face_offset) { face_offset_ = face_offset; }
 
-byte FaceOffset() { return face_offset_; }
+byte GetFaceOffset() { return face_offset_; }
 
 byte ComputeFaceOffset(byte relative_remote_face, byte absolute_local_face) {
   return positive_face_distance(opposite_face_[absolute_local_face],
