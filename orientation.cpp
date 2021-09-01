@@ -33,22 +33,16 @@ static byte best_face_offset() {
   return 0;
 }
 
-void Setup(byte relative_remote_face, byte absolute_local_face) {
-  // The offset is the difference beetween the opposite face to the local_face
-  // and the remote_face. This formula always results in a positive offset.
-  face_offset_ = FaceOffset(relative_remote_face, absolute_local_face);
-}
+void Setup(byte face_offset) { face_offset_ = face_offset; }
 
-void Setup() { face_offset_ = FaceOffset(); }
+byte FaceOffset() { return face_offset_; }
 
-byte FaceOffset(byte relative_remote_face, byte absolute_local_face) {
+byte ComputeFaceOffset(byte relative_remote_face, byte absolute_local_face) {
   return positive_face_distance(opposite_face_[absolute_local_face],
                                 relative_remote_face);
 }
 
-byte FaceOffset() { return best_face_offset(); }
-
-void Reset() { face_offset_ = 0; }
+byte ComputeBestFaceOffset() { return best_face_offset(); }
 
 byte RelativeLocalFace(byte absolute_local_face) {
   return positive_face_distance(absolute_local_face, face_offset_);
