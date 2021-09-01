@@ -5,6 +5,9 @@
 // face numbers that would "point" in the same direction on all Blinks in a
 // cluster no matter what is the Blink orientation in relation to its absolute
 // face numbers.
+//
+// Note that no error checking is made whatsoever. If you give invalid inputs,
+// you will get invalid or incorrect outputs.
 
 #include <blinklib.h>
 
